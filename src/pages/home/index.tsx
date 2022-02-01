@@ -21,7 +21,7 @@ interface IAlunos {
 
 interface IChamada {
   nome: string;
-  status: boolean;
+  presenca: boolean;
 }
 
 const Home: React.FC = () => {
@@ -40,7 +40,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     handleAlunos();
-    alunos.map(res => setChamada([{nome: res.nome, status: false}]));
+    alunos.map(res => setChamada([{nome: res.nome, presenca: false}]));
   },[]);
 
   async function deletarAluno(matricula: number) {
@@ -60,20 +60,16 @@ const Home: React.FC = () => {
   async function finalizarChamada(nome: string, status: boolean, index: number) {
     let recebeChamada = chamada;
     recebeChamada.splice(index, 1);
-    recebeChamada.push({nome: nome, status: !status});
+    recebeChamada.push({nome: nome, presenca: !status});
 
     try {
       await api.put<IChamada[]>(`chamada`, recebeChamada);
-
-      status === false ?
-        successfulNotify(`Presença adicionada ao aluno ${nome}!`)
+      status === false ? successfulNotify(`Presença adicionada ao aluno ${nome}!`) 
       : successfulNotify(`Falta adicionada ao aluno ${nome}!`);
-
     } catch(e) {
       console.log(e);
       errorfulNotify('Não foi possível realizar a chamada.');
     }
-
     handleAlunos();
   }
   
