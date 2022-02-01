@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 import { Container, Lista, PopupModal, Linha  } from './styles'
 
-import { BiEdit } from 'react-icons/bi';
+import { FaUserEdit } from 'react-icons/fa';
 import { MdDeleteForever } from 'react-icons/md';
 
 import Cadastro from '../../components/Popups/Cadastrar';
-import Atualizar from '../../components/Popups/Atualizar';
-import Chamada from '../../components/Popups/Chamada';
+import Atualizar from '../../components/Popups/Editar';
 
 import { errorfulNotify, successfulNotify} from '../../hooks/SystemToasts';
 
@@ -24,7 +23,6 @@ interface IChamada {
   nome: string;
   status: boolean;
 }
-
 
 const Home: React.FC = () => {
   const [alunos, setAlunos] = useState<IAlunos[]>([]);
@@ -59,11 +57,16 @@ const Home: React.FC = () => {
 
   const [chamada, setChamada] = useState<IChamada[]>([]);
 
-  async function finalizarChamada(nome: string, status: boolean) {
-    try {
-      await api.put<IChamada[]>(`chamada`, chamada);
+  async function finalizarChamada(nome: string, status: boolean, index: number) {
+    let recebeChamada = chamada;
+    recebeChamada.splice(index, 1);
+    recebeChamada.push({nome: nome, status: !status});
 
-      status === false ? successfulNotify(`Presença adicionada ao aluno ${nome}!`)
+    try {
+      await api.put<IChamada[]>(`chamada`, recebeChamada);
+
+      status === false ?
+        successfulNotify(`Presença adicionada ao aluno ${nome}!`)
       : successfulNotify(`Falta adicionada ao aluno ${nome}!`);
 
     } catch(e) {
@@ -87,11 +90,6 @@ const Home: React.FC = () => {
             <p>Presentes: {alunos ? alunos.filter(res => res.frequencia === true).length : 0}</p>
             <p>Faltantes: {alunos ? alunos.filter(res => res.frequencia === false).length : 0}</p>
             <div>
-              {/* <PopupModal closeOnEscape trigger={<button>Chamada</button>} modal>
-                {(close: any) => (
-                  <Chamada fechar={close} />
-                )}
-              </PopupModal> */}
               <PopupModal closeOnEscape trigger={<button>Cadastrar</button>} modal>
                 {(close: any) => (
                   <Cadastro atualiza={handleAlunos} fechar={close} />
@@ -115,11 +113,9 @@ const Home: React.FC = () => {
                   <p>{res.nome}</p>
                   <p>{res.cpf}</p>
                   <button onClick={() => {
-                    //trocaStatus(res.nome, res.frequencia)}
-                    setChamada([...chamada, {nome: res.nome, status: !res.frequencia}]);
-                    finalizarChamada(res.nome, res.frequencia);
+                    finalizarChamada(res.nome, res.frequencia, index);
                   }} className="status">{res.frequencia ? 'P' : 'F'}</button>
-                  <PopupModal closeOnEscape trigger={<button><BiEdit size={25}/></button>} modal>
+                  <PopupModal closeOnEscape trigger={<button><FaUserEdit size={25}/></button>} modal>
                     {(close: any) => (
                       <Atualizar atualiza={handleAlunos} fechar={close} matricula={res.matricula} />
                     )}

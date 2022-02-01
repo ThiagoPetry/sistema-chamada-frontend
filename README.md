@@ -1,3 +1,3 @@
-# sistema-chamada-frontend
+# Containers Play
 
-Front-end do sistema de chamada
+Em desenvolvimento, aplicação em teste.

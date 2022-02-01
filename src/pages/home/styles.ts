@@ -29,7 +29,7 @@ export const Container = styled.div`
       font-size: 6vh;
       color: #bad5ff;
       margin-left: 3vw;
-      text-shadow: 0.1vh 0.1vh 1vh rgba(0, 0, 0, 0.2);
+      text-shadow: 0.1vh 0.1vh 1vh rgba(0, 0, 0, 0.1);
     }
 
     h2 {
@@ -82,7 +82,7 @@ export const Lista = styled.div`
     h1 {
       font-size: 4vh;
       color: #bad5ff;
-      text-shadow: 0.1vh 0.1vh 1vh rgba(0, 0, 0, 0.2);
+      text-shadow: 0.1vh 0.1vh 1vh rgba(0, 0, 0, 0.1);
     }
 
     p {
@@ -90,7 +90,7 @@ export const Lista = styled.div`
       color: #bad5ff;
       margin-right: 1vw;
       font-weight: bold;
-      text-shadow: 0.1vh 0.1vh 1vh rgba(0, 0, 0, 0.2);
+      text-shadow: 0.1vh 0.1vh 1vh rgba(0, 0, 0, 0.1);
     }
 
     div {
@@ -130,25 +130,23 @@ export const Lista = styled.div`
       width: 20%;
       font-size: 4vh;
       color: #bad5ff;
-      text-shadow: 0.1vh 0.1vh 1vh rgba(0, 0, 0, 0.2);
+      text-shadow: 0.1vh 0.1vh 1vh rgba(0, 0, 0, 0.1);
     }
 
     h2 {
       width: 13%;
     }
-  }
-
-  
+  }  
 `;
 
 export const Linha = styled.div<IProps>`
   width: 100%;
-  background-color: #deebff;
+
   border-radius: 0.4vh;
 
-  &:nth-child(2n + 1) {
+  /* &:nth-child(2n + 1) {
     background-color: #ebf3ff;
-  }
+  } */
 
   border: 0.1vh solid rgba(0, 0, 0, 0.08);
 
@@ -196,6 +194,12 @@ export const Linha = styled.div<IProps>`
   }
 
   ${props => props.presenca === true && css`
+    background-color: #d4ffd8;
+    
+    &:hover {
+      background-color: ${shade(0.03, '#d4ffd8')};
+    }
+
     .status {
       color: #36a820;
 
@@ -208,6 +212,12 @@ export const Linha = styled.div<IProps>`
   `}
 
   ${props => props.presenca === false && css`
+    background-color: #ffd4d4;
+
+    &:hover {
+      background-color: ${shade(0.03, '#ffd4d4')};
+    }
+
     .status {
       color: #ff2b2b;
 
