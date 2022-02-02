@@ -52,6 +52,8 @@ const Atualizar: React.FC<IPopupVerbaAtualizar> = ({ fechar, matricula, atualiza
       console.log(e);
     }
 
+    dados = {matricula: 0, nome: '', cpf: 0};
+    
     atualiza();
   }
 

@@ -82,6 +82,7 @@ const Home: React.FC = () => {
         </div>
         <Lista>
           <div id="info">
+            <p>Turma: MI68</p>
             <p>Total de alunos: {alunos ? alunos.length : 0}</p>
             <p>Presentes: {alunos ? alunos.filter(res => res.frequencia === true).length : 0}</p>
             <p>Faltantes: {alunos ? alunos.filter(res => res.frequencia === false).length : 0}</p>

@@ -194,10 +194,10 @@ export const Linha = styled.div<IProps>`
   }
 
   ${props => props.presenca === true && css`
-    background-color: #d4ffd8;
+    background-color: #e3ffe6;
     
     &:hover {
-      background-color: ${shade(0.03, '#d4ffd8')};
+      background-color: ${shade(0.03, '#e3ffe6')};
     }
 
     .status {
@@ -212,10 +212,10 @@ export const Linha = styled.div<IProps>`
   `}
 
   ${props => props.presenca === false && css`
-    background-color: #ffd4d4;
+    background-color: #ffe6e6;
 
     &:hover {
-      background-color: ${shade(0.03, '#ffd4d4')};
+      background-color: ${shade(0.03, '#ffe6e6')};
     }
 
     .status {
